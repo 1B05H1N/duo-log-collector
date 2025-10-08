@@ -1,0 +1,19 @@
+# Duo Log Collector Requirements
+# Python 3.6+ required
+
+# This project uses only Python standard library modules for maximum security
+# and minimal attack surface. No external dependencies are required.
+
+# Standard library modules used:
+# - urllib.request, urllib.parse (HTTP requests)
+# - json (JSON handling)
+# - hmac, hashlib, base64 (authentication)
+# - time, datetime (time handling)
+# - os, sys (system operations)
+# - logging (logging)
+# - argparse (command line parsing)
+# - typing (type hints)
+# - csv (CSV export)
+# - collections (data structures)
+
+# No external packages required
