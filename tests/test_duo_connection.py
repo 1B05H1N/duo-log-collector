@@ -29,19 +29,19 @@ def test_api_connection():
         integration_key, secret_key, api_hostname = load_credentials()
         print(f"   Integration Key: {integration_key[:8]}...")
         print(f"   API Hostname: {api_hostname}")
-        print("   ✓ Credentials loaded successfully")
+        print("   [OK] Credentials loaded successfully")
         
         # Initialize client
         print("\n2. Initializing API client...")
         client = DuoAPIClient(integration_key, secret_key, api_hostname)
-        print("   ✓ Client initialized")
+        print("   [OK] Client initialized")
         
         # Test basic API call (get account info)
         print("\n3. Testing API authentication...")
         try:
             response = client._make_request('GET', '/admin/v1/info/summary')
             if response.get('stat') == 'OK':
-                print("   ✓ Authentication successful")
+                print("   [OK] Authentication successful")
                 
                 # Display account info
                 account_info = response.get('response', {})
@@ -52,11 +52,11 @@ def test_api_connection():
                 print(f"   Integration Count: {account_info.get('integration_count', 'Unknown')}")
                 
             else:
-                print(f"   ✗ Authentication failed: {response.get('message', 'Unknown error')}")
+                print(f"   [ERROR] Authentication failed: {response.get('message', 'Unknown error')}")
                 return False
                 
         except Exception as e:
-            print(f"   ✗ API call failed: {str(e)}")
+            print(f"   [ERROR] API call failed: {str(e)}")
             return False
         
         # Test log access permissions
@@ -64,26 +64,26 @@ def test_api_connection():
         try:
             # Try to get a small sample of authentication logs
             logs = client.get_authentication_logs(limit=1)
-            print("   ✓ Authentication log access: OK")
+            print("   [OK] Authentication log access: OK")
         except Exception as e:
-            print(f"   ✗ Authentication log access failed: {str(e)}")
+            print(f"   [ERROR] Authentication log access failed: {str(e)}")
             print("   Note: This may indicate missing 'Grant read log' permission")
         
         try:
             # Try to get a small sample of admin logs
             logs = client.get_administrator_logs(limit=1)
-            print("   ✓ Administrator log access: OK")
+            print("   [OK] Administrator log access: OK")
         except Exception as e:
-            print(f"   ✗ Administrator log access failed: {str(e)}")
+            print(f"   [ERROR] Administrator log access failed: {str(e)}")
             print("   Note: This may indicate missing 'Grant read log' permission")
         
         print("\n" + "=" * 40)
-        print("✓ Connection test completed successfully!")
+        print("[OK] Connection test completed successfully!")
         print("You can now run the main log collector script.")
         return True
         
     except Exception as e:
-        print(f"\n✗ Connection test failed: {str(e)}")
+        print(f"\n[ERROR] Connection test failed: {str(e)}")
         print("\nTroubleshooting tips:")
         print("1. Verify your Duo API credentials are correct")
         print("2. Check that your Admin API application is active")

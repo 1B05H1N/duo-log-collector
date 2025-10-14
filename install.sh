@@ -14,9 +14,9 @@ python_version=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.v
 required_version="3.6"
 
 if [ "$(printf '%s\n' "$required_version" "$python_version" | sort -V | head -n1)" = "$required_version" ]; then
-    echo "✓ Python $python_version detected (requires 3.6+)"
+    echo "[OK] Python $python_version detected (requires 3.6+)"
 else
-    echo "✗ Python 3.6+ is required. Found: $python_version"
+    echo "[ERROR] Python 3.6+ is required. Found: $python_version"
     exit 1
 fi
 
@@ -26,7 +26,7 @@ if [[ $create_venv =~ ^[Yy]$ ]]; then
     echo "Creating virtual environment..."
     python3 -m venv venv
     source venv/bin/activate
-    echo "✓ Virtual environment created and activated"
+    echo "[OK] Virtual environment created and activated"
     echo "  To activate in the future, run: source venv/bin/activate"
 fi
 
@@ -35,23 +35,23 @@ read -p "Install development dependencies (flake8, pytest, bandit)? (y/n): " ins
 if [[ $install_dev =~ ^[Yy]$ ]]; then
     echo "Installing development dependencies..."
     pip install flake8 pytest bandit safety
-    echo "✓ Development dependencies installed"
+    echo "[OK] Development dependencies installed"
 fi
 
 # Set up environment file
 if [ ! -f .env ]; then
     echo "Setting up environment file..."
     cp docs/.env.example .env
-    echo "✓ Environment file created from template"
+    echo "[OK] Environment file created from template"
     echo "  Please edit .env with your Duo API credentials"
 else
-    echo "✓ Environment file already exists"
+    echo "[OK] Environment file already exists"
 fi
 
 # Make scripts executable
 echo "Making scripts executable..."
 chmod +x src/*.py tests/*.py examples/*.py
-echo "✓ Scripts made executable"
+echo "[OK] Scripts made executable"
 
 # Test imports
 echo "Testing imports..."
@@ -62,9 +62,9 @@ try:
     import duo_log_collector
     import duo_auth_logs_only
     import duo_auth_log_analyzer
-    print('✓ All modules import successfully')
+    print('[OK] All modules import successfully')
 except ImportError as e:
-    print(f'✗ Import error: {e}')
+    print(f'[ERROR] Import error: {e}')
     sys.exit(1)
 "
 

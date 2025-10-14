@@ -29,12 +29,12 @@ def test_auth_log_connection():
         integration_key, secret_key, api_hostname = load_credentials()
         print(f"   Integration Key: {integration_key[:8]}...")
         print(f"   API Hostname: {api_hostname}")
-        print("   ✓ Credentials loaded successfully")
+        print("   [OK] Credentials loaded successfully")
         
         # Initialize collector
         print("\n2. Initializing authentication log collector...")
         collector = DuoAuthLogCollector(integration_key, secret_key, api_hostname)
-        print("   ✓ Collector initialized")
+        print("   [OK] Collector initialized")
         
         # Test authentication log access
         print("\n3. Testing authentication log access...")
@@ -49,8 +49,8 @@ def test_auth_log_connection():
                 limit=5  # Just get a few logs for testing
             )
             
-            print(f"   ✓ Authentication log access: OK")
-            print(f"   ✓ Retrieved {len(logs)} sample authentication logs")
+            print(f"   [OK] Authentication log access: OK")
+            print(f"   [OK] Retrieved {len(logs)} sample authentication logs")
             
             if logs:
                 print(f"\n4. Sample Authentication Log Analysis:")
@@ -90,17 +90,17 @@ def test_auth_log_connection():
                 print("   This may be normal if there has been no recent activity")
         
         except Exception as e:
-            print(f"   ✗ Authentication log access failed: {str(e)}")
+            print(f"   [ERROR] Authentication log access failed: {str(e)}")
             print("   Note: This may indicate missing 'Grant read log' permission")
             return False
         
         print("\n" + "=" * 50)
-        print("✓ Authentication log collection test completed successfully!")
+        print("[OK] Authentication log collection test completed successfully!")
         print("You can now run the main authentication log collector script.")
         return True
         
     except Exception as e:
-        print(f"\n✗ Test failed: {str(e)}")
+        print(f"\n[ERROR] Test failed: {str(e)}")
         print("\nTroubleshooting tips:")
         print("1. Verify your Duo API credentials are correct")
         print("2. Check that your Admin API application is active")
