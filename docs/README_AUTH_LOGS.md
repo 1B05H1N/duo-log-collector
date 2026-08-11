@@ -38,7 +38,7 @@ Authentication logs contain detailed information about user authentication attem
 Before using this script, set up an Admin API application in your Duo account:
 
 1. Log in to the Duo Admin Panel
-2. Navigate to Applications → Application Catalog
+2. Navigate to Applications -> Application Catalog
 3. Find "Admin API" and click "Add"
 4. Configure the application with **"Grant read log"** permission
 5. Note your integration key, secret key, and API hostname
